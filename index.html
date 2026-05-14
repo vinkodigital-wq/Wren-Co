@@ -751,42 +751,7 @@
     .btn-primary { width: 100%; text-align: center; }
   }
 
-  /* ── GALLERY STRIP ── */
-  .gallery-strip {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    grid-template-rows: 260px 260px;
-    gap: 3px;
-  }
-
-  .gallery-strip .g-main {
-    grid-row: 1 / 3;
-    overflow: hidden;
-  }
-
-  .gallery-strip .g-cell { overflow: hidden; }
-
-  .gallery-strip img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-    filter: saturate(0.88);
-    transition: transform 0.5s ease, filter 0.4s;
-  }
-
-  .gallery-strip img:hover { transform: scale(1.04); filter: saturate(1); }
-
-  @media (max-width: 768px) {
-    .gallery-strip { grid-template-columns: 1fr 1fr; grid-template-rows: 180px 180px; }
-    .gallery-strip .g-main { grid-row: 1; grid-column: 1 / 3; }
-    .service-card-img { height: 180px; }
-    .service-card-body { padding: 1.5rem 1.25rem; }
-  }
-</style>
-</head>
-<body>
-
+ 
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">
