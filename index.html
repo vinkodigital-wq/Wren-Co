@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bloom Events Melbourne</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF7F2;
+    --warm-white: #FFFDF9;
+    --sage: #8A9B8E;
+    --sage-light: #C4CFC6;
+    --sage-dark: #4A5C4E;
+    --blush: #E8C4B0;
+    --blush-dark: #C4886A;
+    --charcoal: #2C2C2A;
+    --text-muted: #7A7A78;
+    --gold: #B8965A;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--charcoal);
+    font-weight: 300;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 4rem;
+    background: rgba(255,253,249,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid rgba(138,155,142,0.2);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--charcoal);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--sage-dark); font-style: italic; }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--charcoal); }
+
+  .nav-cta {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.6rem;
+    border: 1px solid var(--sage-dark);
+    color: var(--sage-dark);
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+
+  .nav-cta:hover { background: var(--sage-dark); color: white; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 4rem 5rem 6rem;
+    background: var(--cream);
+  }
+
+  .hero-tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--charcoal);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--sage-dark);
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    max-width: 400px;
+    margin-bottom: 3rem;
+    font-weight: 300;
+  }
+
+  .hero-actions { display: flex; gap: 1rem; align-items: center; }
+
+  .btn-primary {
+    padding: 1rem 2.5rem;
+    background: var(--sage-dark);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--charcoal); }
+
+  .btn-ghost {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s;
+  }
+
+  .btn-ghost:hover { color: var(--charcoal); }
+  .btn-ghost::after { content: '→'; }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #D4C5B0 0%, #B8A99A 40%, #9E8E7E 100%);
+  }
+
+  .hero-image-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .hero-image-placeholder svg {
+    opacity: 0.3;
+    width: 64px;
+    height: 64px;
+  }
+
+  /* Floating stat */
+  .hero-stat {
+    position: absolute;
+    bottom: 3rem;
+    left: -2rem;
+    background: white;
+    padding: 1.25rem 1.75rem;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+  }
+
+  .hero-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--sage-dark);
+    line-height: 1;
+  }
+
+  .hero-stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+  }
+
+  /* SERVICES */
+  .services {
+    padding: 8rem 6rem;
+    background: var(--warm-white);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 4rem;
+  }
+
+  .section-tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-tag::before {
+    content: '';
+    display: block;
+    width: 1.5rem;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--charcoal);
+  }
+
+  .section-title em { font-style: italic; color: var(--sage-dark); }
+
+  .view-all {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .view-all:hover { color: var(--charcoal); }
+  .view-all::after { content: '→'; }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .service-card {
+    padding: 3rem 2.5rem;
+    background: var(--cream);
+    transition: background 0.3s;
+    cursor: default;
+  }
+
+  .service-card:hover { background: #EDE8E0; }
+
+  .service-icon {
+    width: 3rem;
+    height: 3rem;
+    border: 1px solid var(--sage-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    color: var(--sage-dark);
+    font-size: 1.1rem;
+  }
+
+  .service-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--charcoal);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .service-card p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-price {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* PROCESS */
+  .process {
+    padding: 8rem 6rem;
+    background: var(--sage-dark);
+    color: white;
+  }
+
+  .process .section-tag { color: var(--blush); }
+  .process .section-tag::before { background: var(--blush); }
+  .process .section-title { color: white; }
+  .process .section-title em { color: var(--sage-light); }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+    margin-top: 4rem;
+  }
+
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.15);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .step h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: white;
+    margin-bottom: 0.75rem;
+  }
+
+  .step p {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.8;
+  }
+
+  /* TESTIMONIALS */
+  .testimonials {
+    padding: 8rem 6rem;
+    background: var(--cream);
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+  }
+
+  .testimonial-card {
+    background: white;
+    padding: 2.5rem;
+    border: 0.5px solid rgba(138,155,142,0.2);
+  }
+
+  .quote-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    color: var(--sage-light);
+    line-height: 0.5;
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+
+  .testimonial-card p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--charcoal);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .author-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--sage-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--sage-dark);
+    letter-spacing: 0.05em;
+  }
+
+  .author-info strong {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--charcoal);
+    display: block;
+  }
+
+  .author-info span {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  /* CTA SECTION */
+  .cta-section {
+    padding: 8rem 6rem;
+    background: var(--warm-white);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .cta-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--charcoal);
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-section h2 em { font-style: italic; color: var(--sage-dark); }
+
+  .cta-section p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.9;
+    margin-bottom: 2.5rem;
+  }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+  .form-group label {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 0.85rem 1rem;
+    border: 1px solid rgba(138,155,142,0.3);
+    background: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--charcoal);
+    outline: none;
+    transition: border-color 0.3s;
+    width: 100%;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--sage-dark); }
+
+  .form-group textarea { resize: vertical; min-height: 100px; }
+
+  .form-submit {
+    padding: 1rem 2.5rem;
+    background: var(--sage-dark);
+    color: white;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s;
+    align-self: flex-start;
+  }
+
+  .form-submit:hover { background: var(--charcoal); }
+
+  /* FOOTER */
+  footer {
+    background: var(--charcoal);
+    color: white;
+    padding: 4rem 6rem 2rem;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 4rem;
+    padding-bottom: 3rem;
+    border-bottom: 0.5px solid rgba(255,255,255,0.1);
+  }
+
+  .footer-brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: white;
+    margin-bottom: 1rem;
+  }
+
+  .footer-brand-name span { color: var(--sage-light); font-style: italic; }
+
+  .footer-tagline {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-social { display: flex; gap: 1rem; }
+
+  .social-link {
+    width: 36px;
+    height: 36px;
+    border: 0.5px solid rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 0.75rem;
+    transition: all 0.3s;
+  }
+
+  .social-link:hover { border-color: white; color: white; }
+
+  .footer-col h4 {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+
+  .footer-col ul a {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .footer-col ul a:hover { color: white; }
+
+  .footer-bottom {
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.3);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-left > * {
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-left > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-left > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero-left > *:nth-child(3) { animation-delay: 0.35s; }
+  .hero-left > *:nth-child(4) { animation-delay: 0.5s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Bloom <span>Events</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">How it Works</a></li>
+    <li><a href="#testimonials">Stories</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Book a Call</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-tag">Melbourne Event Planning</p>
+    <h1>Every moment,<br><em>perfectly</em><br>composed.</h1>
+    <p class="hero-sub">Bespoke weddings, birthdays, and celebrations crafted with intention. Based in Melbourne, we bring your vision to life — beautifully and effortlessly.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Start Planning</a>
+      <a href="#services" class="btn-ghost">Our Services</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-image-placeholder">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="8" width="48" height="48" rx="2" stroke="white" stroke-width="1.5"/>
+        <circle cx="24" cy="26" r="6" stroke="white" stroke-width="1.5"/>
+        <path d="M8 44L20 32L30 42L42 28L56 44" stroke="white" stroke-width="1.5"/>
+      </svg>
+      Add your hero image here
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">200+</div>
+      <div class="hero-stat-label">Events Planned</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header">
+    <div>
+      <p class="section-tag">What We Offer</p>
+      <h2 class="section-title">Moments worth<br><em>remembering</em></h2>
+    </div>
+    <a href="#contact" class="view-all">View All Packages</a>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">💍</div>
+      <h3>Weddings</h3>
+      <p>Full-service wedding planning from venue sourcing to day-of coordination. We handle every detail so you can be fully present for your biggest day.</p>
+      <span class="service-price">From $3,500</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎂</div>
+      <h3>Birthday Celebrations</h3>
+      <p>Milestone birthdays to intimate gatherings — we create personalised experiences that celebrate who you are and the people you love.</p>
+      <span class="service-price">From $800</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">👶</div>
+      <h3>Baby Showers</h3>
+      <p>Tender, thoughtfully styled baby showers that honour the mum-to-be. Styling, catering coordination, and every beautiful detail taken care of.</p>
+      <span class="service-price">From $600</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <p class="section-tag">The Journey</p>
+  <h2 class="section-title">Planning made<br><em>effortless</em></h2>
+  <div class="process-steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h4>Discovery Call</h4>
+      <p>We start with a relaxed conversation about your vision, style, and budget. No pressure, just clarity.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h4>Custom Proposal</h4>
+      <p>Within 48 hours, you'll receive a tailored proposal with venue ideas, styling concepts, and a clear investment guide.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h4>We Handle It All</h4>
+      <p>From vendor coordination to timelines and logistics — we manage every moving part while keeping you in the loop.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <h4>You Enjoy the Day</h4>
+      <p>On the day, we're there from setup to farewell so you can be fully present with the people who matter most.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="section-header">
+    <div>
+      <p class="section-tag">Client Stories</p>
+      <h2 class="section-title">Heard from<br><em>our couples & families</em></h2>
+    </div>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <span class="quote-mark">"</span>
+      <p>Working with Bloom Events was the best decision we made for our wedding. Every single detail was perfect and we didn't stress once on the day.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">SC</div>
+        <div class="author-info">
+          <strong>Sarah & Chris</strong>
+          <span>Yarra Valley Wedding</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <span class="quote-mark">"</span>
+      <p>My daughter's baby shower was absolutely beautiful. The styling was beyond what I imagined and it felt so personal to us. Thank you!</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">ML</div>
+        <div class="author-info">
+          <strong>Michelle L.</strong>
+          <span>Baby Shower, Fitzroy</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <span class="quote-mark">"</span>
+      <p>My 40th was everything I wanted and more. The team thought of details I never would have — our guests are still talking about it months later.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">JT</div>
+        <div class="author-info">
+          <strong>James T.</strong>
+          <span>40th Birthday, South Yarra</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section class="cta-section" id="contact">
+  <div>
+    <p class="section-tag">Get in Touch</p>
+    <h2>Let's create something<br><em>unforgettable</em></h2>
+    <p>Ready to start planning? We'd love to hear about your event. Fill in the form and we'll be in touch within 24 hours for a complimentary discovery call.</p>
+    <p style="font-size: 0.82rem; color: var(--text-muted);">📍 Based in Melbourne, Victoria<br>✉️ hello@bloomevents.com.au<br>📞 0400 000 000</p>
+  </div>
+  <div>
+    <form class="contact-form" onsubmit="return false;">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="Sophie">
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Williams">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="sophie@email.com">
+      </div>
+      <div class="form-group">
+        <label>Event Type</label>
+        <select>
+          <option value="">Select an event type</option>
+          <option>Wedding</option>
+          <option>Birthday Celebration</option>
+          <option>Baby Shower</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Tell us about your event</label>
+        <textarea placeholder="Date, guest numbers, vision, budget — whatever you'd like to share..."></textarea>
+      </div>
+      <button class="form-submit" type="submit">Send Enquiry →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand-name">Bloom <span>Events</span></div>
+      <p class="footer-tagline">Bespoke event planning for Melbourne's most cherished celebrations. We handle every detail with care.</p>
+      <div class="footer-social">
+        <a href="#" class="social-link">IG</a>
+        <a href="#" class="social-link">FB</a>
+        <a href="#" class="social-link">PN</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#">Weddings</a></li>
+        <li><a href="#">Birthdays</a></li>
+        <li><a href="#">Baby Showers</a></li>
+        <li><a href="#">Corporate Events</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Our Process</a></li>
+        <li><a href="#">Portfolio</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="#">hello@bloomevents.com.au</a></li>
+        <li><a href="#">0400 000 000</a></li>
+        <li><a href="#">Melbourne, VIC</a></li>
+        <li><a href="#">Book a Call</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Bloom Events Melbourne. All rights reserved.</span>
+    <span>Privacy Policy · Terms of Service</span>
+  </div>
+</footer>
+
+</body>
+</html>
